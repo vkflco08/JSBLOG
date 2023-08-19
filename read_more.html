@@ -1,0 +1,49 @@
+<?php
+    require("./modify_display_page.inc");
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"
+  ></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#header").load("header.html");
+      $("#nav").load("navigation.html");
+      $("#footer").load("footer.html");
+      $("#script").load("script.html");
+      /* id 지정을 통해서도 가능합니다. 
+             $("#header").load("header.html #navbar")
+             */
+    });
+  </script>
+  <div id="header"></div>
+  <body>
+    <div id="nav"></div>
+    <section class="py-5">
+      <div class="container mb-5">
+        <h4 class="fw-bolder col mb-5" name="title">
+          <?php echo $result[0][2]; ?>
+        </h4>
+        <h5 class="fw-bolder"><?php echo $result[0][3]; ?></h5>
+        <div class="pt-4">
+            <pre class="fw-bolder"><?php echo $result[0][4]; ?></pre>
+        </div>
+        <div><?php echo $result[0][5]; ?></div>
+        <form style="float: right" action="modify.html" method="post">
+          <input
+            type="hidden"
+            name="title"
+            value="<?php echo $result[0][2]; ?>"
+          />
+          <button class="btn btn-outline-dark" type="submit">Modify</button>
+        </form>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+    <div id="script"></div>
+  </body>
+</html>

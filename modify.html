@@ -1,0 +1,50 @@
+<?php
+    require("./modify_display_page.inc");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#header").load("header.html");
+      $("#nav").load("navigation.html");
+      $("#footer").load("footer.html");
+      $("#script").load("script.html");
+      /* id 지정을 통해서도 가능합니다. 
+             $("#header").load("header.html #navbar")
+             */
+    });
+  </script>
+  <div id="header"></div>
+  <body>
+    <div id="nav"></div>
+    <section class="py-5">
+      <div class="container">
+        <form action="modify_ok.php" method="post">
+          <div class="row gx-4 gx-lg-5 row-cols-1 justify-content-left h=100">
+            <input type="hidden" name="num" value="<?php echo $result[0][0]; ?>"/>
+            <textarea name="title" maxlength="30" rows="1" cols="auto" maxlength="150" required> <?php echo $result[0][2] ?></textarea>
+            <select name="language" style="width: 110px">
+              <option value="C">           C     </option>
+              <option value="C++" selected>C++   </option>
+              <option value="Python">      Python</option>
+              <option value="etc">           etc </option>
+            </select>
+            <textarea name="description" maxlength="100" rows="auto" cols="auto" required><?php echo $result[0][3] ?></textarea>&nbsp;
+            <textarea name="source_code" rows="20" cols="auto" required><?php echo $result[0][4] ?></textarea>&nbsp;
+            <button class="btn btn-outline-dark" type="submit" style="float: right"> Save </button>&nbsp;
+          </div>
+        </form>
+        <form action="delete_ok.php" method="post" onsubmit="return confirm( '정말로 삭제하시겠습니까?' );">
+          <input type="hidden" name="num" value="<?php echo $result[0][0]; ?>"/>
+          <button class="btn btn-outline-danger" type="submit" style="float: right"> Delete </button>
+        </form>
+      </div>
+    </section>
+
+    <div id="footer"></div>    
+    <div id="script"></div>
+  </body>
+</html>

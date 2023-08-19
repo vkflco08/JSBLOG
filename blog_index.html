@@ -1,0 +1,79 @@
+<?php
+require("./db_connect.inc");
+include("js/login_ok.php");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#header").load("header.html");
+      $("#nav").load("navigation.html");
+      $("#footer").load("footer.html");
+      $("#script").load("script.html");
+      /* id 지정을 통해서도 가능합니다. 
+             $("#header").load("header.html #navbar")
+             */
+    });
+  </script>
+  <div id="header"></div>
+  <body>
+    <div id="nav"></div>
+    <!-- Header-->
+      <header class="bg-dark py-2">
+          <div class="container px-4 px-lg-5 my-5">
+              <div class="text-center text-white">
+                  <h1 id="clock" class="display-4 fw-bolder">00:00:00</h1>
+                  <p id="greet" class="lead fw-normal text-white-50 mb-2"> Record your to-do list for today! </p>
+                  <form id="todo-form" class="mt-2 mb-2">
+                    <input class="input" type="text" style="width:232px" placeholder=" Write a To Do and Press Enter" required>
+                  </form>
+                  <ul id="todo-list"></ul>
+              </div>
+          </div>
+      </header>
+    <!-- Section-->
+    <section class="py-5">
+      <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          <?php for($i = 0; $i < 12; $i++){ 
+            if($result[$i][2] == "")  continue;
+            ?>
+          <form class="col mb-5" action="read_more.html" method="post">
+            <div class="card h-100">
+              <!-- Product image
+                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                -->
+              <!-- Product details-->
+              <div class="card-body py-4 p-3">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder"><?php echo $result[$i][2]; ?></h5>
+                  <!-- for pass the title value to read_more.html -->
+                  <input type="hidden" name="title" value="<?php echo $result[$i][2]; ?>" />
+                  <!-- Product price-->
+                  <?php echo $result[$i][3]; ?>
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer" style="background-color:white">
+                <div class="text-center">
+                  <button class="btn btn-outline-dark mt-auto" type="submit">
+                    Read more
+                  </button>
+                </div>
+              </div>
+              <div class="px-2 text-end"> <?php echo $result[$i][5]; ?></div>
+            </div>
+          </form>
+          <?php } ?>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+    <div id="script"></div>
+  </body>
+</html>

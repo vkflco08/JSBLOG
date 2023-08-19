@@ -1,0 +1,43 @@
+<?php
+//require("./db_connect.inc");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#header").load("header.html");
+      $("#nav").load("navigation.html");
+      $("#footer").load("footer.html");
+      $("#script").load("script.html");
+      /* id 지정을 통해서도 가능합니다. 
+             $("#header").load("header.html #navbar")
+             */
+    });
+  </script>
+  <div id="header"></div>
+  <body>
+    <div id="nav"></div>
+    <section class="py-5">
+      <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> 
+            <form class="col mb-2" id="login_form">
+                <input style="float:center" class="mb-2" type="text" placeholder=" ID" 
+                autofocus="autofocus" id="login_form_id" autocomplete="off"/>
+                <input class="mb-2" type="password" placeholder=" PW" id="login_form_pw" autocomplete="off"/>
+                <!-- Product actions-->
+                <button class="btn btn-outline-dark mt-auto" style="float:right" onclick=Auth.login()>
+                    Login
+                </button>
+            </form>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+    <div id="script"></div>
+    <script src="js/login_form.js"></script>
+</body>  
+</html>
